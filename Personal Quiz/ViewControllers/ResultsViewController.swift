@@ -14,15 +14,17 @@ class ResultsViewController: UIViewController {
     // 3. Отобразить результат в соответсвии с этим животным
     // 4. Избавиться от кнопки возврата назад на экране результатов
     
+    @IBOutlet var defenitionLabel: UILabel!
+    @IBOutlet var resultLabel: UILabel!
+
+    
     var answerArray: [Answer] = []
     
     private var dogScore: [AnimalType] = []
     private var catScore: [AnimalType] = []
     private var turtleScore: [AnimalType] = []
     private var rabbitScore: [AnimalType] = []
-    
-    private var dictionary: [AnimalType : Int] = [ : ]
-
+    private var dictionary: [AnimalType: Int] = [ : ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +47,15 @@ class ResultsViewController: UIViewController {
             }
             
             dictionary = [
-                .dog : dogScore.count,
-                .cat : catScore.count,
-                .turtle : turtleScore.count,
-                .rabbit : rabbitScore.count
+                .dog: dogScore.count,
+                .cat: catScore.count,
+                .turtle: turtleScore.count,
+                .rabbit: rabbitScore.count
             ]
+            let sorted = dictionary.sorted { $0.value > $1.value }
+            let winner = sorted[0].key
+            defenitionLabel.text = winner.definition
+            resultLabel.text = "Вы - \(winner.rawValue)!"
         }
     }
 }
