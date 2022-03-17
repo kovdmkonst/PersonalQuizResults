@@ -17,14 +17,13 @@ class ResultsViewController: UIViewController {
     @IBOutlet var defenitionLabel: UILabel!
     @IBOutlet var resultLabel: UILabel!
 
-    
     var answerArray: [Answer] = []
     
     private var dogScore: [AnimalType] = []
     private var catScore: [AnimalType] = []
     private var turtleScore: [AnimalType] = []
     private var rabbitScore: [AnimalType] = []
-    private var dictionary: [AnimalType: Int] = [ : ]
+    private var animalDictionary: [AnimalType: Int] = [ : ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,26 +33,18 @@ class ResultsViewController: UIViewController {
     
     func calculateResult() {
         for animal in answerArray {
-            if animal.type == .dog {
-                dogScore.append(animal.type)
-            }
-            if animal.type == .cat {
-                catScore.append(animal.type)
-            }
-            if animal.type == .turtle {
-                turtleScore.append(animal.type)
-            }
-            if animal.type == .rabbit {
-                rabbitScore.append(animal.type)
-            }
+            if animal.type == .dog { dogScore.append(animal.type) }
+            if animal.type == .cat { catScore.append(animal.type) }
+            if animal.type == .turtle { turtleScore.append(animal.type) }
+            if animal.type == .rabbit { rabbitScore.append(animal.type) }
             
-            dictionary = [
+            animalDictionary = [
                 .dog: dogScore.count,
                 .cat: catScore.count,
                 .turtle: turtleScore.count,
                 .rabbit: rabbitScore.count
             ]
-            let sorted = dictionary.sorted { $0.value > $1.value }
+            let sorted = animalDictionary.sorted { $0.value > $1.value }
             let winner = sorted[0].key
             defenitionLabel.text = winner.definition
             resultLabel.text = "Вы - \(winner.rawValue)!"
